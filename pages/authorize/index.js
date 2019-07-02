@@ -113,6 +113,8 @@ Page({
             })
             return;
           }
+          console.log(res.data.token +"res.data.token")
+
           wx.setStorageSync('token', res.data.token)
           wx.setStorageSync('openId', res.data.openid)
           wx.setStorageSync('uid', res.data.uid)

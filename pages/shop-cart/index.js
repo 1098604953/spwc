@@ -41,6 +41,7 @@ Page({
     var shopList = [];
     // 获取购物车数据
     var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+    console.log(shopCarInfoMem +"shopCarInfoMem")
     if (shopCarInfoMem && shopCarInfoMem.shopList) {
       shopList = shopCarInfoMem.shopList
     }

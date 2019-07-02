@@ -142,7 +142,7 @@ Page({
   tobuy: function() {
     this.setData({
       shopType: "tobuy",
-      selectSizePrice: this.data.goodsDetail.basicInfo.minPrice
+      selectSizePrice: this.data.goodsDetail.minPrice
     });
     this.bindGuiGeTap();
   },
@@ -432,9 +432,9 @@ Page({
     shopCarMap.left = "";
     shopCarMap.active = true;
     shopCarMap.number = this.data.buyNumber;
-    shopCarMap.logisticsType = this.data.goodsDetail.basicInfo.logisticsId;
-    shopCarMap.logistics = this.data.goodsDetail.logistics;
-    shopCarMap.weight = this.data.goodsDetail.basicInfo.weight;
+    shopCarMap.logisticsType = this.data.logisticsId;
+    shopCarMap.logistics = this.data.logistics;
+    shopCarMap.weight = "";
 
     var buyNowInfo = {};
     if (!buyNowInfo.shopNum) {

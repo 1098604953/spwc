@@ -22,15 +22,15 @@
         <view class="row-box" wx:if="{{isNeedLogistics > 0}}">
             <view class="row-label">配送方式</view>
             <radio-group bindchange="radioChange">
-              <label class="radio">
+              <!-- <label class="radio">
                 <radio value="kd" checked="{{peisongType == 'kd'}}" /> 快递
-              </label>
-              <label class="radio" wx:if='{{allowSelfCollection == "1"}}'>
+              </label> -->
+              <!-- <label class="radio" wx:if='{{allowSelfCollection == "1"}}'>
                 <radio value="zq" checked="{{peisongType == 'zq'}}" /> 到店自取
-              </label>
+              </label> -->
             </radio-group>
         </view>
-        <view class="address-box" wx:if="{{peisongType == 'kd' && isNeedLogistics > 0}}">
+        <!-- <view class="address-box" wx:if="{{peisongType == 'kd' && isNeedLogistics > 0}}">
           <view class="add-address" hidden="{{curAddressData}}">
               <view class="title" bindtap="addAddress">新增收货地址</view>
           </view>
@@ -38,7 +38,7 @@
               <view class="name-tel">{{curAddressData.linkMan}}  {{curAddressData.mobile}}</view>
               <view class="addr-text">{{curAddressData.address}}</view>
           </view>
-        </view>
+        </view> -->
         <view class="row-box">
             <view class="row-label">备注</view>
             <view class="right-text">
