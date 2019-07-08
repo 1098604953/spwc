@@ -142,7 +142,7 @@ Page({
   tobuy: function() {
     this.setData({
       shopType: "tobuy",
-      selectSizePrice: this.data.goodsDetail.minPrice
+      selectSizePrice: this.data.goodsDetail.hyPrice
     });
     this.bindGuiGeTap();
   },
@@ -418,16 +418,18 @@ Page({
    */
   buliduBuyNowInfo: function(shoptype) {
     var shopCarMap = {};
-    shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
-    shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
-    shopCarMap.name = this.data.goodsDetail.basicInfo.name;
+    console.log(this.data.goodsDetail.id+"==========================================")
+    shopCarMap.goodsId = this.data.goodsDetail.id;
+    shopCarMap.pic = this.data.goodsDetail.image;
+    shopCarMap.name = this.data.goodsDetail.goodsName;
     // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
+    console.log(this.data.selectSizePrice+"************************************")
     shopCarMap.price = this.data.selectSizePrice;
-    if (shoptype == 'toPingtuan') {
-      shopCarMap.price = this.data.goodsDetail.basicInfo.pingtuanPrice;
-    }
+    // if (shoptype == 'toPingtuan') {
+    //   shopCarMap.price = this.data.goodsDetail.basicInfo.pingtuanPrice;
+    // }
     shopCarMap.score = this.data.totalScoreToPay;
     shopCarMap.left = "";
     shopCarMap.active = true;
@@ -466,7 +468,7 @@ Page({
   onShareAppMessage: function() {
     let _data = {
       title: this.data.goodsDetail.basicInfo.name,
-      path: '/pages/goods-details/index?id=' + this.data.goodsDetail.basicInfo.id + '&inviter_id=' + wx.getStorageSync('uid'),
+      path: '/pages/goods-details/index?id=' + this.data.goodsDetail.id + '&inviter_id=' + wx.getStorageSync('uid'),
       success: function(res) {
         // 转发成功
       },

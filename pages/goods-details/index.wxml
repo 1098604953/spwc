@@ -244,7 +244,7 @@
       <view class="popup-join-btn" wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar">
         加入购物车
       </view>
-      <view class="popup-join-btn" data-shopType="{{shopType}}" wx:if="{{shopType =='tobuy' || shopType =='toPingtuan'}}" bindtap="buyNow">
+      <view class="popup-join-btn" data-shopType="{{shopType}}" wx:if="{{shopType =='tobuy'}}" bindtap="buyNow">
         立即购买
       </view>
     </view>

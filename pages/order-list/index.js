@@ -6,7 +6,10 @@ Page({
     statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
     hasRefund: false,
     currentType: 0,
-    tabClass: ["", "", "", "", ""]
+    tabClass: ["", "", "", "", ""],
+    curPage: 1,
+    pageSize: 10,
+    cateScrollTop: 0
   },
   statusTap: function(e) {
     const curType = e.currentTarget.dataset.index;
@@ -161,7 +164,9 @@ Page({
     // 获取订单列表
     var that = this;
     var postData = {
-      token: wx.getStorageSync('token')
+      token: wx.getStorageSync('token'),
+      page: this.data.curPage,
+      pageSize: this.data.pageSize
     };
     postData.hasRefund = that.data.hasRefund;
     if (!postData.hasRefund) {
@@ -169,6 +174,7 @@ Page({
     }
     this.getOrderStatistics();
     WXAPI.orderList(postData).then(function(res) {
+      console.log(postData.token + "****" + postData.status)
       if (res.code == 0) {
         that.setData({
           orderList: res.data.orderList,
@@ -198,6 +204,11 @@ Page({
   },
   onReachBottom: function() {
     // 页面上拉触底事件的处理函数
-
+    this.setData({
+      curPage: this.data.curPage + 1
+    });
   }
+
+   
+
 })

@@ -129,8 +129,8 @@ Page({
     }
 
     WXAPI.orderCreate(postData).then(function (res) {
-      console.log(res+"res")
-      if (res.code != 0) {
+      console.log(res.status+"res.status")
+      if (res.status != 200) {
         wx.showModal({
           title: '错误',
           content: res.msg,
@@ -223,10 +223,10 @@ Page({
   initShippingAddress: function () {
     var that = this;
     WXAPI.defaultAddress(wx.getStorageSync('token')).then(function (res) {
-      console.log(res+"========================token放初始地址，没有就不放")
+      console.log(res.data+"========================token放初始地址，没有就不放")
       if (res.code == 0) {
         that.setData({
-          curAddressData: res.data
+          curAddressData: "四川省成都市"
         });
       } else {
         that.setData({

@@ -280,10 +280,10 @@ module.exports = {
     return request1('/tOrder/create', true, 'post', data)
   },
   orderList: (data) => {
-    return request('/order/list', true, 'post', data)
+    return request1('/tOrder/list', true, 'post', data)
   },
   orderDetail: (id, token) => {
-    return request('/order/detail', true, 'get', {
+    return request1('/tOrder/detail', true, 'get', {
       id,
       token
     })
