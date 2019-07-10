@@ -267,12 +267,12 @@ module.exports = {
     return request('/user/wxapp/bindMobile', true, 'post', data)
   },
   userDetail: (token) => {
-    return request('/user/detail', true, 'get', {
+    return request1('/tUser/detail', true, 'get', {
       token
     })
   },
   userAmount: (token) => {
-    return request('/user/amount', true, 'get', {
+    return request1('/tUser/amount', true, 'get', {
       token
     })
   },
@@ -304,7 +304,7 @@ module.exports = {
     })
   },
   orderPay: (orderId, token) => {
-    return request('/order/pay', true, 'post', {
+    return request1('/tOrder/pay', true, 'post', {
       orderId,
       token
     })

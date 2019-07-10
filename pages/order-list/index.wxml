@@ -12,18 +12,43 @@
   <view class="order-list" hidden="{{orderList ? false : true}}">
     <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
       <navigator url="/pages/order-details/index?id={{item.id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">{{item.orderNumber}}</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">{{item.statusStr}}</view>
+      <view class="weui-cell__bd">{{item.orderName}}</view>  <!-- 订单名称或商品卖家店铺 -->
+        <view class="weui-cell__ft weui-cell__ft_in-access">{{item.statName}}</view><!-- 订单状态名 -->
       </navigator>
-      <scroll-view class="goods-img-container" scroll-x="true">
-        <view class="img-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
-          <image src="{{item.pic}}" class="goods-img"></image>
-        </view>
-      </scroll-view>
+      <!-- <scroll-view class="goods-img-container" scroll-x="true">
+       <!-- <view class="img-box" wx:for-items="{{item.orderlist}}" wx:key="{{index}}">
+        <!-- {{item.goodsName}}
+        {{item.price}}
+        {{item.num}}
+        <image src="{{item.image}}" class="goods-img"></image> 
+        </view>  
+      </scroll-view> -->
+
+      <scroll-view scroll-y="true" >
+    <view class="img-box" wx:for-items="{{item.orderlists}}" wx:key="{{index}}" style='max-heigth:120rpx;'>
+<view style='max-heigth:220rpx;'>
+<view style='max-heigth:80%;margin-left:10rpx;'><image src="{{item.image}}" ></image> </view>
+  
+      <view style='margin-left:10rpx;'>
+          {{item.goodsName}}
+      </view>
+      <view style='float:right;margin-right:30rpx;'>
+      <view style='font-size:22rpx'>￥ {{item.price}}</view>
+      <view style='font-size:22rpx'>x {{item.num}}</view>
+        
+       
+      </view>
+    
+
+</view>
+    
+       
+        </view>  
+  </scroll-view>
       <view class="goods-price">
-        共 {{item.goodsNumber}} 件商品 合计：
-        <text class="p" wx:if="{{item.score <= 0}}">¥ {{item.amountReal}}</text>
-        <text class="p" wx:if="{{item.score > 0}}">¥ {{item.amountReal}} + {{item.score}} 积分</text>
+        共 {{item.num}} 件商品 合计：
+        <text class="p" wx:if="{{item.totalPrice > 0}}">¥ {{item.totalPrice}}</text>
+        <!-- <text class="p" wx:if="{{item.score > 0}}">¥ {{item.amountReal}} + {{item.score}} 积分</text> -->
       </view>
       <view class="goods-info">
         <view class="goods-des">
@@ -32,9 +57,9 @@
         </view>
       </view>
       <view class="price-box">
-        <view class="btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
-        <view class="btn active" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}" data-score="{{item.score}}">马上付款</view>
-        <view class="btn active" hidden="{{(item.status==0 || item.status==-1) ? true : false}}" bindtap="refundApply" data-id="{{item.id}}" data-amount='{{item.amountReal}}'>退换货</view>
+        <view class="btn" hidden="{{item.status==1? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
+        <view class="btn active" hidden="{{item.stat==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.totalPrice}}" data-score="{{item.score}}">马上付款</view>
+        <view class="btn active" hidden="{{(item.stat==1) ? true : false}}" bindtap="refundApply" data-id="{{item.id}}" data-amount='{{item.amountReal}}'>退换货</view>
       </view>
     </view>
 

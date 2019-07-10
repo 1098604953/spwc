@@ -10,6 +10,7 @@ Page({
     },
     onLoad:function(e){
       var orderId = e.id;
+      console.log(e.id +"e.id;")
       this.data.orderId = orderId;
       this.setData({
         orderId: orderId
@@ -18,7 +19,7 @@ Page({
     onShow : function () {
       var that = this;
       WXAPI.orderDetail(that.data.orderId, wx.getStorageSync('token')).then(function (res) {
-        if (res.code != 0) {
+        if (res.status !=200) {
           wx.showModal({
             title: '错误',
             content: res.msg,
@@ -26,8 +27,9 @@ Page({
           })
           return;
         }
+        console.log(res.data)
         that.setData({
-          orderDetail: res.data
+          orderDetail: res.data.order
         });
       })
       var yunPrice = parseFloat(this.data.yunPrice);

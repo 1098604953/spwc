@@ -14,6 +14,7 @@ Page({
   statusTap: function(e) {
     const curType = e.currentTarget.dataset.index;
     this.data.currentType = curType
+    console.log(e.currentTarget.dataset.index)
     this.setData({
       currentType: curType
     });
@@ -36,7 +37,7 @@ Page({
       }
     })
   },
-  refundApply (e) {
+  refundApply(e) {
     // 申请售后
     const orderId = e.currentTarget.dataset.id;
     const amount = e.currentTarget.dataset.amount;
@@ -47,36 +48,38 @@ Page({
   toPayTap: function(e) {
     const that = this;
     const orderId = e.currentTarget.dataset.id;
+
     let money = e.currentTarget.dataset.money;
     const needScore = e.currentTarget.dataset.score;
     WXAPI.userAmount(wx.getStorageSync('token')).then(function(res) {
-      if (res.code == 0) {
+      console.log(res.data.user.moneyMy)
+      console.log(e.currentTarget.dataset.money)
+      if (res.status == 200) {
         // 增加提示框
-        if (res.data.score < needScore) {
+        if (res.data.user.moneyMy < money) {
           wx.showToast({
-            title: '您的积分不足，无法支付',
+            title: '您的余额不足，无法支付',
             icon: 'none'
           })
           return;
         }
-        let _msg = '订单金额: ' + money +' 元'
-        if (res.data.balance > 0) {
-          _msg += ',可用余额为 ' + res.data.balance +' 元'
-          if (money - res.data.balance > 0) {
-            _msg += ',仍需微信支付 ' + (money - res.data.balance) + ' 元'
-          }          
+        let _msg = '订单金额: ' + money + ' 元'
+        if (res.data.user.moneyMy > 0) {
+          _msg += ',可用余额为 ' + res.data.user.moneyMy+ ' 元'
+          if (money - res.data.user.moneyMy > 0) {
+            _msg += ',仍需微信支付 ' + (money - res.data.user.moneyMy) + ' 元'
+          }
         }
         if (needScore > 0) {
           _msg += ',并扣除 ' + money + ' 积分'
         }
-        money = money - res.data.balance
+        money = money - res.data.user.moneyMy
         wx.showModal({
           title: '请确认支付',
           content: _msg,
           confirmText: "确认支付",
           cancelText: "取消支付",
-          success: function (res) {
-            console.log(res);
+          success: function(res) {
             if (res.confirm) {
               that._toPayTap(orderId, money)
             } else {
@@ -93,15 +96,15 @@ Page({
       }
     })
   },
-  _toPayTap: function (orderId, money){
+  _toPayTap: function(orderId, money) {
     const _this = this
     if (money <= 0) {
       // 直接使用余额支付
-      WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function (res) {
+      WXAPI.orderPay(orderId, wx.getStorageSync('token')).then(function(res) {
         _this.onShow();
       })
     } else {
-      wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
+      // wxpay.wxpay('order', money, orderId, "/pages/order-list/index");
     }
   },
   onLoad: function(options) {
@@ -116,7 +119,7 @@ Page({
           hasRefund: false,
           currentType: options.type
         });
-      }      
+      }
     }
   },
   onReady: function() {
@@ -174,12 +177,12 @@ Page({
     }
     this.getOrderStatistics();
     WXAPI.orderList(postData).then(function(res) {
-      console.log(postData.token + "****" + postData.status)
-      if (res.code == 0) {
+      console.log(res.data.userOrders);
+      if (res.status == 200) {
         that.setData({
-          orderList: res.data.orderList,
-          logisticsMap: res.data.logisticsMap,
-          goodsMap: res.data.goodsMap
+          orderList: res.data.userOrders,
+          logisticsMap: {},
+          goodsMap: {}
         });
       } else {
         that.setData({
@@ -209,6 +212,6 @@ Page({
     });
   }
 
-   
+
 
 })

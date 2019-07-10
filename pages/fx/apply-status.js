@@ -35,32 +35,32 @@ Page({
   async onShow() {
     const _this = this
     const userDetail = await WXAPI.userDetail(wx.getStorageSync('token'))
-    WXAPI.fxApplyProgress(wx.getStorageSync('token')).then(res => {
-      let applyStatus = userDetail.data.base.isSeller ? 2 : -1
-      if (res.code == 2000) {
-        app.goLoginPageTimeOut()
-        return
-      }
-      if (res.code === 700) {
-        _this.setData({
-          applyStatus: applyStatus
-        })
-      }
-      if (res.code === 0) {
-        if (userDetail.data.base.isSeller) {
-          applyStatus = 2
-        } else {
-          applyStatus = res.data.status
-        }
-        _this.setData({
-          applyStatus: applyStatus,
-          applyInfo: res.data
-        })
-      }
-      if (applyStatus == 2) {
-        _this.fetchQrcode()
-      }
-    })
+    // WXAPI.fxApplyProgress(wx.getStorageSync('token')).then(res => {
+    //   let applyStatus = userDetail.data.base.isSeller ? 2 : -1
+    //   if (res.code == 2000) {
+    //     app.goLoginPageTimeOut()
+    //     return
+    //   }
+    //   if (res.code === 700) {
+    //     _this.setData({
+    //       applyStatus: applyStatus
+    //     })
+    //   }
+    //   if (res.code === 0) {
+    //     if (userDetail.data.base.isSeller) {
+    //       applyStatus = 2
+    //     } else {
+    //       applyStatus = res.data.status
+    //     }
+    //     _this.setData({
+    //       applyStatus: applyStatus,
+    //       applyInfo: res.data
+    //     })
+    //   }
+    //   if (applyStatus == 2) {
+    //     _this.fetchQrcode()
+    //   }
+    // })
   },
   fetchQrcode(){
     const _this = this
