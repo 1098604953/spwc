@@ -109,20 +109,19 @@ Page({
         })
         return
       }
-
-      wx.showToast({
-        title: '注册成功',
-        icon: 'success',
-        duration: 2000,
-        success: function () {
-         
-          setTimeout(function () {
+      wx.showLoading({ 
+        title: '注册成功 \r\n 用户名:' + res.data.regUser.username+'初始密码:111111',
+      
+      })
+      wx.hideLoading({
+          success: function () {
             wx.switchTab({
               url: "/pages/index/index"
             })
-          }, 2000) //延迟时间
+
         }
-      })
+      });
+  
      
     })
   }

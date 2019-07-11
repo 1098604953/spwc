@@ -71,11 +71,16 @@ Page({
   getUserApiInfo: function () {
     var that = this;
     WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
+      console.log(res.data.user)
+      console.log(res.status + "statu")
+      console.log(res.data.user.stat)
+      console.log(res.data.user.type)
+      if (res.status == 200) {
         let _data = {}
-        _data.apiUserInfoMap = res.data
-        if (res.data.base.mobile) {
-          _data.userMobile = res.data.base.mobile
+        _data.apiUserInfoMap = res.data.user
+       
+        if (res.data.user.phone) {
+          _data.userMobile = res.data.user.phone
         }
         that.setData(_data);
       }

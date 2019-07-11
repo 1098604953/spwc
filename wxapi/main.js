@@ -344,7 +344,7 @@ module.exports = {
     return request('/config/vipLevel', true, 'get')
   },
   fxApply: (token, name, mobile) => {
-    return request('/saleDistribution/apply', true, 'post', { token, name, mobile })
+    return request1('/tUser/tgRegUser', true, 'post', { token, name, mobile })
   },
   fxApplyProgress: (token) => {
     return request('/saleDistribution/apply/progress', true, 'get', { token })
@@ -355,6 +355,7 @@ module.exports = {
   fxCommisionLog: (data) => {
     return request('/saleDistribution/commision/log', true, 'post', data)
   },
+  //推广二维码
   wxaQrcode: (data) => {
     return request('/qrcode/wxa/unlimit', true, 'post', data)
   },

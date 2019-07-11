@@ -42,7 +42,9 @@ Page({
     } else {
       offset = 0;
     }
+    console.log(e.currentTarget.id +"    console.log(e.currentTarget.id)")
     this.setData({
+  
       activeCategoryId: e.currentTarget.id,
       curPage: 1,
       cateScrollTop: offset
