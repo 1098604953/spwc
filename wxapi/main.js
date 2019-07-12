@@ -344,7 +344,7 @@ module.exports = {
     return request('/config/vipLevel', true, 'get')
   },
   fxApply: (token, name, mobile) => {
-    return request1('/tUser/tgRegUser', true, 'post', { token, name, mobile })
+    return request1('/tApply/fxRegister', true, 'post', { token, name, mobile })
   },
   fxApplyProgress: (token) => {
     return request('/saleDistribution/apply/progress', true, 'get', { token })
