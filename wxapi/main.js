@@ -321,7 +321,7 @@ module.exports = {
     })
   },
   province: () => {
-    return request1('/common/region/v2/province', false, 'get')
+    return request('/common/region/v2/province', false, 'get')
   },
   nextRegion: (pid) => {
     return request('/common/region/v2/child', false, 'get', {

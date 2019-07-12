@@ -10,6 +10,8 @@ Page({
   },
   initRegionPicker () {
     WXAPI.province().then(res => {
+      console.log("****************************")
+      console.log(res.data)
       if (res.code === 0) {
         let _pickerRegionRange = []
         _pickerRegionRange.push(res.data)
