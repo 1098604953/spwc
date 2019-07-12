@@ -5,7 +5,7 @@ Page({
   data: {
     totalScoreToPay: 0,
     goodsList: [],
-    isNeedLogistics: 0, // 是否需要物流信息
+    isNeedLogistics: 1, // 是否需要物流信息
     allGoodsPrice: 0,
     yunPrice: 0,
     allGoodsAndYunPrice: 0,
@@ -49,7 +49,7 @@ Page({
     that.setData({
       goodsList: shopList,
       allowSelfCollection: allowSelfCollection,
-      peisongType: that.data.peisongType
+      peisongType: 'kd'
     });
     that.initShippingAddress();
   },
@@ -90,7 +90,7 @@ Page({
       token: loginToken,
       goodsJsonStr: that.data.goodsJsonStr,
       remark: remark,
-      peisongType: that.data.peisongType
+      peisongType: 'kd'
     };
     if (that.data.kjId) {
       postData.kjid = that.data.kjId
@@ -146,7 +146,7 @@ Page({
       if (!e) {
         that.setData({
           totalScoreToPay: res.data.score,
-          isNeedLogistics: res.data.isNeedLogistics,
+          isNeedLogistics: 1,
           allGoodsPrice: res.data.amountTotle,
           allGoodsAndYunPrice: res.data.amountLogistics + res.data.amountTotle,
           yunPrice: res.data.amountLogistics
@@ -223,7 +223,6 @@ Page({
   initShippingAddress: function () {
     var that = this;
     WXAPI.defaultAddress(wx.getStorageSync('token')).then(function (res) {
-      console.log(res.data+"========================token放初始地址，没有就不放")
       if (res.code == 0) {
         that.setData({
           curAddressData: "四川省成都市"
@@ -240,7 +239,7 @@ Page({
     var that = this;
     var goodsList = this.data.goodsList;
     var goodsJsonStr = "[";
-    var isNeedLogistics = 0;
+    var isNeedLogistics = 1;
     var allGoodsPrice = 0;
 
 
@@ -269,7 +268,7 @@ Page({
     goodsJsonStr += "]";
     console.log(goodsJsonStr +"goodsJsonStr");
     that.setData({
-      isNeedLogistics: isNeedLogistics,
+      isNeedLogistics: 1,
       goodsJsonStr: goodsJsonStr
     });
     that.createOrder();
@@ -320,7 +319,7 @@ Page({
   },
   radioChange (e) {
     this.setData({
-      peisongType: e.detail.value
+      peisongType: 'kd'
     })
   }
 })

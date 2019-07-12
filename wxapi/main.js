@@ -232,7 +232,7 @@ module.exports = {
     })
   },
   defaultAddress: (token) => {
-    return request('/user/shipping-address/default', true, 'get', {
+    return request1('/tUser/shipping-address/default', true, 'get', {
       token
     })
   },
