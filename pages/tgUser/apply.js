@@ -99,8 +99,18 @@ Page({
       })
       return
     }
-    WXAPI.fxApply(wx.getStorageSync('token'), name, mobile).then(res => {
-      console.log(res.data.regUser)
+    // var myreg = ^((13[0-9])|(15[0-9])|(18[0-9])|(17[0-9]))\\d{8}$;
+    if (!(/^1[34578]\d{9}$/.test(mobile))) {
+      console.log((/^1[34578]\d{9}$/.test(mobile))+ "myreg.test(mobile)")
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'loading',
+        duration: 1000
+      });
+      return;
+    } 
+    WXAPI.tgRegUser(wx.getStorageSync('token'), name, mobile).then(res => {
+      console.log(res.data)
       if (res.status != 200) {
         wx.showToast({
           title: res.msg,
@@ -109,20 +119,23 @@ Page({
         })
         return
       }
-      wx.showLoading({ 
-        title: '注册成功 \r\n 用户名:' + res.data.regUser.username+'初始密码:111111',
-      
-      })
-      wx.hideLoading({
-          success: function () {
-            wx.switchTab({
-              url: "/pages/index/index"
-            })
+      if (res.status == 200){
+        wx.showLoading({
+          title: '注册成功 \r\n 用户名:' +res.data.regUser.username + '初始密码:111111',
 
-        }
-      });
-  
-     
+        })
+        setTimeout(function () {
+          wx.hideLoading({
+            success: function () {
+              wx.switchTab({
+                url: "/pages/index/index"
+              })
+
+            }
+          });
+        }, 2000);
+      }
+
     })
   }
 })

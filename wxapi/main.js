@@ -98,9 +98,18 @@ module.exports = {
       token
     })
   },
-  scoreExchange: (number, token) => {
-    return request('/score/exchange', true, 'post', {
-      number,
+  scoreExchange: (amount, type,token) => {
+    return request1('/tUserScoreChange/ScoreExchange', true, 'post', {
+      amount,
+      type,
+      token
+    })
+  },
+  scoreTransfer: (amount,type, toUser, token) => {
+    return request1('/tUserScoreChange/scoreTransfer', true, 'post', {
+      amount,
+      type,
+      toUser,
       token
     })
   },
@@ -276,6 +285,9 @@ module.exports = {
       token
     })
   },
+  tgRegUser: (token, name, mobile) => {
+    return request1('/tUser/tgRegUser', true, 'post', { token, name, mobile })
+  },
   orderCreate: (data) => {
     return request1('/tOrder/create', true, 'post', data)
   },
@@ -321,7 +333,7 @@ module.exports = {
     })
   },
   province: () => {
-    return request('/common/region/v2/province', false, 'get')
+    return request1('/tAddress/province', false, 'get')
   },
   nextRegion: (pid) => {
     return request('/common/region/v2/child', false, 'get', {
@@ -346,6 +358,7 @@ module.exports = {
   fxApply: (token, name, mobile) => {
     return request1('/tApply/fxRegister', true, 'post', { token, name, mobile })
   },
+
   fxApplyProgress: (token) => {
     return request('/saleDistribution/apply/progress', true, 'get', { token })
   },

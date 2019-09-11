@@ -139,6 +139,8 @@ Page({
       })
       return
     }
+    console.log(address
+      +"address")
     if (mobile == ""){
       wx.showModal({
         title: '提示',
@@ -172,19 +174,21 @@ Page({
       return
     }
     let apiResult
+    
     if (that.data.id) {
-      apiResult = WXAPI.updateAddress({
-        token: wx.getStorageSync('token'),
-        id: that.data.id,
-        provinceId: this.data.pObject.id,
-        cityId: this.data.cObject.id,
-        districtId: this.data.dObject ? this.data.dObject.id : '',
-        linkMan: linkMan,
-        address: address,
-        mobile: mobile,
-        code: code,
-        isDefault: 'true'
-      })
+      console.log(that.data.id +"that.data.id")
+      // apiResult = WXAPI.updateAddress({
+      //   token: wx.getStorageSync('token'),
+      //   id: that.data.id,
+      //   provinceId: this.data.pObject.id,
+      //   cityId: this.data.cObject.id,
+      //   districtId: this.data.dObject ? this.data.dObject.id : '',
+      //   linkMan: linkMan,
+      //   address: address,
+      //   mobile: mobile,
+      //   code: code,
+      //   isDefault: 'true'
+      // })
     } else {
       apiResult = WXAPI.addAddress({
         token: wx.getStorageSync('token'),
@@ -198,6 +202,7 @@ Page({
         isDefault: 'true'
       })
     }
+    console.log("provinceId:" + this.data.pObject.id + "cityId:" + this.data.cObject.id + "districtId:" + this.data.dObject ? this.data.dObject.id : '' + "address:" + address)
     apiResult.then(function (res) {
       if (res.code != 0) {
         // 登录错误 

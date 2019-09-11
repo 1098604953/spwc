@@ -100,7 +100,6 @@ Page({
       return
     }
     WXAPI.fxApply(wx.getStorageSync('token'), name, mobile).then(res => {
-      console.log(res.data.regUser)
       if (res.status != 200) {
         wx.showToast({
           title: res.msg,
@@ -111,7 +110,7 @@ Page({
       }
 
       wx.showToast({
-        title: '注册成功',
+        title: '提交成功',
         icon: 'success',
         duration: 2000,
         success: function () {

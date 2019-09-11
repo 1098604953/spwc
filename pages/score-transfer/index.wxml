@@ -1,8 +1,9 @@
 <view class="container">
     <form bindsubmit="bindSave">
     <view class="form-box">
-    <view class="row-wrap"> 
-    <view class="label">请选择转换类型</view>
+
+     <view class="row-wrap"> 
+       <view class="label">请选择转账类型</view>
        <radio-group class="radio-group" bindchange="radioChange" >
           <label class="radio" wx:for="{{items}}">
             <radio value="{{item.id}}" checked="{{item.checked}}"/>
@@ -13,13 +14,15 @@
 
         <view class="row-wrap">
 
-       
-            <view class="label">转换金额</view>
+            <view class="label">转账金额</view>
             <view class="label-right">
-                <input name="amount" class="input" type="number" placeholder="请输入转换金额"/>
+                <input name="amount" class="input" type="number" placeholder="请输入转账金额"/>
+            </view>
+            <view class="label-right">
+                <input name="toUser" class="input" type="text" placeholder="请输入收款用户"/>
             </view>
         </view>
     </view>
-    <button type="warn" class="save-btn" formType="submit">立即转换</button>
+    <button type="warn" class="save-btn" formType="submit">立即转账</button>
     </form>
 </view>

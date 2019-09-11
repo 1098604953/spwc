@@ -19,6 +19,7 @@
     "pages/kanjia/index",
     "pages/authorize/index",
     "pages/score-excharge/index",
+    "pages/score-transfer/index",
     "pages/asset/index",
     "pages/score/index",
     "pages/sign/index",

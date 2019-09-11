@@ -7,12 +7,13 @@ Page({
    */
   data: {
     uid: undefined,
+   toUser:undefined,
     items: [
-      { id: '1', value: '购物积分转余额',checked: 'true' },
-      { id: '2', value: '余额转购物积分' },
-  
+      { id: '1', value: '购物积分', checked: 'true' },
+      { id: '2', value: '余额' },
+
     ],
-    type:1,
+    type: 1,
   },
 
   /**
@@ -71,21 +72,31 @@ Page({
 
   },
 
-  radioChange: function(e){
+
+  radioChange: function (e) {
     var exchargeType = e.detail.value
     console.log('radio发生change事件，携带的value值为：', e.detail.value)
     this.setData({
       type: e.detail.value
     })
   },
+
   bindSave: function(e) {
     var that = this;
     var    amount = e.detail.value.amount;
-
+    var  toUser = e.detail.value.toUser;
     if (amount == "") {
       wx.showModal({
         title: '错误',
-        content: '请输入转换金额',
+        content: '请输入转账金额',
+        showCancel: false
+      })
+      return
+    }
+    if (toUser == "") {
+      wx.showModal({
+        title: '错误',
+        content: '请输入收款人用户名',
         showCancel: false
       })
       return
@@ -99,7 +110,8 @@ Page({
       })
       return
     }
-    WXAPI.scoreExchange(amount,this.data.type, wx.getStorageSync('token')).then(function(res) {
+    WXAPI.scoreTransfer(amount, this.data.type,toUser, wx.getStorageSync('token')).then(function(res) {
+      console.log(res)
       // if (res.code == 700) {
       //   wx.showModal({
       //     title: '错误',
@@ -111,7 +123,7 @@ Page({
       if (res.status == 200) {
         wx.showModal({
           title: '成功',
-          content: '转换成功',
+          content: '转账成功',
           showCancel: false,
           success: function(res) {
             if (res.confirm) {
@@ -120,9 +132,10 @@ Page({
           }
         })
       } else {
+        console.log("///////////" + res.data)
         wx.showModal({
           title: '错误',
-          content: res.data.msg,
+          content: res.msg,
           showCancel: false
         })
       }

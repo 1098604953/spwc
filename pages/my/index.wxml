@@ -43,10 +43,10 @@
   <block wx:if="{{vipLevel > 0}}">
   <view style="height:10rpx;background: #eee;width:100%;"></view>
  <view class="my-item" wx:if="{{!apiUserInfoMap.type}} >０">
-    <navigator url="/pages/tgUser/apply-status" hover-class="navigator-hover">推荐新会员</navigator>
+    <navigator url="/pages/tgUser/apply" hover-class="navigator-hover">推荐新会员</navigator>
   </view>
   <view class="my-item" wx:if="{{!apiUserInfoMap.stat}}>0">
-    <navigator url="/pages/fx/apply-status" hover-class="navigator-hover">成为分销商</navigator>
+    <navigator url="/pages/fx/apply" hover-class="navigator-hover">成为分销商</navigator>
   </view>
   <view class="my-item" wx:if="{{apiUserInfoMap.stat}}>0">
     <navigator url="/pages/fx/apply-status" hover-class="navigator-hover">分销中心</navigator>
@@ -60,9 +60,9 @@
   </block>
 
   <view style="height:10rpx;background: #eee;width:100%;"></view>
-  <view class="my-item" wx:if="{{vipLevel > 0}}">
-    <navigator url="/pages/maidan/index" hover-class="navigator-hover">优惠买单</navigator>
-  </view>
+  <!-- <view class="my-item" wx:if="{{vipLevel > 0}}">
+  <navigator url="/pages/maidan/index" hover-class="navigator-hover">优惠买单</navigator>
+  </view> -->
   <view class="my-item">
     <navigator url="/pages/asset/index" hover-class="navigator-hover">资金明细</navigator>
   </view>
@@ -70,17 +70,21 @@
     <navigator url="/pages/sign/index" hover-class="navigator-hover">每日签到</navigator>
   </view>
   <view class="my-item">
-    <navigator url="/pages/score-excharge/index" hover-class="navigator-hover">积分兑换</navigator>
+    <navigator url="/pages/score-excharge/index" hover-class="navigator-hover">积分转换</navigator>
   </view>  
   <view class="my-item">
-    <navigator url="/pages/select-address/index" hover-class="navigator-hover">收货地址</navigator>
+    <navigator url="/pages/select-address/index" hover-class="navigator-hover">地址管理</navigator>
   </view>
-  <view class="my-item">
+
+    <view class="my-item">
+    <navigator url="/pages/score-transfer/index" hover-class="navigator-hover">积分转账</navigator>
+  </view>
+  <!-- <view class="my-item">
     <navigator url="/pages/coupons/index" hover-class="navigator-hover">领券中心</navigator>
-  </view>
-  <view wx:if="{{userMobile}}" class="my-item" style="border:none;padding-right:150rpx;width:auto;">
+  </view> -->
+  <!-- <view wx:if="{{userMobile}}" class="my-item" style="border:none;padding-right:150rpx;width:auto;">
     {{userMobile}}
-  </view>
+  </view> -->
   <view style="height:20rpx;background: #eee;width:100%;"></view>
   <view class="about" bindtap="aboutUs">
     关于我们

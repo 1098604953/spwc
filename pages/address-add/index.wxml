@@ -20,6 +20,11 @@
               {{showRegionStr}}
             </picker>
         </view>
+ 
+ 
+        <view>
+        
+        </view>
         <view class="addr-details">
             <view class="label">详细地址</view>
             <view class="label-right">

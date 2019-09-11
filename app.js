@@ -146,3 +146,5 @@ App({
     vipLevel: 0
   }
 })
+
+wx.navigateBack();
