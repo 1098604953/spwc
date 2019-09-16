@@ -8,7 +8,7 @@ Page({
    */
   data: {
     balance: 0.00,
-    freeze: 0,
+    // freeze: 0,
     score: 0,
     score_sign_continuous: 0,
     cashlogs: undefined
@@ -39,23 +39,24 @@ Page({
       return
     }
     WXAPI.userAmount(token).then(function (res) {
-      if (res.code == 700) {
+      //此处尚未统计累计消费
+      console.log(res)
+      if (res.status == 700) {
         wx.showToast({
           title: '当前账户存在异常',
           icon: 'none'
         })
         return
       }
-      if (res.code == 2000) {
+      if (res.status == 2000) {
         app.goLoginPageTimeOut()
         return
       }
-      if (res.code == 0) {
+      if (res.status == 200) {
         _this.setData({
-          balance: res.data.balance.toFixed(2),
-          freeze: res.data.freeze.toFixed(2),
-          totleConsumed: res.data.totleConsumed.toFixed(2),
-          score: res.data.score
+          balance: res.data.user.moneyMy,
+          totleConsumed: 0.0,
+          score: res.data.user.monryScore
         });
       }
     })
@@ -108,12 +109,15 @@ Page({
 
   },
 
+/**
+ * 充值
+ */
   recharge: function (e) {
-    WXAPI.addTempleMsgFormid({
-      token: wx.getStorageSync('token'),
-      type: 'form',
-      formId: e.detail.formId
-    })
+    // WXAPI.addTempleMsgFormid({
+    //   token: wx.getStorageSync('token'),
+    //   type: 'form',
+    //   formId: e.detail.formId
+    // })
     wx.navigateTo({
       url: "/pages/recharge/index"
     })

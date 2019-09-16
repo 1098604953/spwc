@@ -1,6 +1,7 @@
 const app = getApp();
 const CONFIG = require('../../config.js')
 const WXAPI = require('../../wxapi/main')
+
 Page({
     data:{
       orderId:0,
@@ -10,7 +11,7 @@ Page({
     },
     onLoad:function(e){
       var orderId = e.id;
-      console.log(e.id +"e.id;")
+    
       this.data.orderId = orderId;
       this.setData({
         orderId: orderId
@@ -27,21 +28,24 @@ Page({
           })
           return;
         }
-        console.log(res.data)
         that.setData({
           orderDetail: res.data.order
         });
+
+
+        // var yunPrice = parseFloat(this.data.yunPrice);
+        var allprice = 0;
+        var goodsList = that.data.orderDetail.orderlists;
+        for (var i = 0; i < goodsList.length; i++) {
+          allprice += parseFloat(goodsList[0].price) * goodsList[0].number;
+        }
+        that.setData({
+          allGoodsPrice: allprice,
+          // yunPrice: yunPrice
+        });
+
       })
-      var yunPrice = parseFloat(this.data.yunPrice);
-      var allprice = 0;
-      var goodsList = this.data.goodsList;
-      for (var i = 0; i < goodsList.length; i++) {
-        allprice += parseFloat(goodsList[0].price) * goodsList[0].number;
-      }
-      this.setData({
-        allGoodsPrice: allprice,
-        yunPrice: yunPrice
-      });
+     
     },
     wuliuDetailsTap:function(e){
       var orderId = e.currentTarget.dataset.id;

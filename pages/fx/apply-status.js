@@ -33,7 +33,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   async onShow() {
-    console.log("**********************************************")
     const _this = this
     const userDetail = await WXAPI.userDetail(wx.getStorageSync('token'))
     //获取用户的注册信息是否成功，如果成功，显示
@@ -73,9 +72,9 @@ Page({
       title: '加载中',
       mask: true
     })
-wx.navigateTo({
-  url: '/pages/fx/apply',
-})
+    wx.navigateTo({
+      url: '/pages/fx/apply-status',
+    })
   //   WXAPI.wxaQrcode({
   //     scene: 'inviter_id=' + wx.getStorageSync('uid'),
   //     page: 'pages/index/index',

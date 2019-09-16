@@ -4,7 +4,7 @@ const WXAPI = require('../../wxapi/main')
 Page({
 	data: {
     balance:0.00,
-    freeze:0,
+    // freeze:0,
     score:0,
     score_sign_continuous:0
   },
@@ -71,10 +71,6 @@ Page({
   getUserApiInfo: function () {
     var that = this;
     WXAPI.userDetail(wx.getStorageSync('token')).then(function (res) {
-      console.log(res.data.user)
-      console.log(res.status + "statu")
-      console.log(res.data.user.stat)
-      console.log(res.data.user.type)
       if (res.status == 200) {
         let _data = {}
         _data.apiUserInfoMap = res.data.user
@@ -89,11 +85,11 @@ Page({
   getUserAmount: function () {
     var that = this;
     WXAPI.userAmount(wx.getStorageSync('token')).then(function (res) {
-      if (res.code == 0) {
+      if (res.status == 200) {
         that.setData({
-          balance: res.data.balance.toFixed(2),
-          freeze: res.data.freeze.toFixed(2),
-          score: res.data.score
+          balance: res.data.user.moneyMy,
+          // freeze: res.data.freeze.toFixed(2),
+          score: res.data.user.moneyScore
         });
       }
     })

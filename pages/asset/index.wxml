@@ -3,14 +3,14 @@
     <view>可用余额(元)</view>
     <view>{{balance}}</view>
   </view>
-  <view class='item'>    
+  <!-- <view class='item'>    
     <view>冻结金额(元)</view>
     <view>{{freeze}}</view>
   </view>
   <view class='item right'>    
     <view>累计消费(元)</view>
     <view>{{totleConsumed}}</view>
-  </view>
+  </view> -->
 </view>
 <view class='btn-view'>
   <form bindsubmit="recharge" report-submit="true">

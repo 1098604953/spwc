@@ -35,7 +35,7 @@
       <view style='float:right;margin-right:30rpx;'>
       <view style='font-size:22rpx'>￥ {{item.price}}</view>
       <view style='font-size:22rpx'>x {{item.num}}</view>
-        
+        <view>987</view>
        
       </view>
     
