@@ -8,8 +8,8 @@ Page({
   data: {
     uid: undefined,
     items: [
-      { id: '1', value: '购物积分转余额',checked: 'true' },
-      { id: '2', value: '余额转购物积分' },
+      { id: '1', value: '余额转购物积分',checked: 'true' },
+      { id: '2', value: '购物积分转余额' },
   
     ],
     type:1,
@@ -73,14 +73,13 @@ Page({
 
   radioChange: function(e){
     var exchargeType = e.detail.value
-    console.log('radio发生change事件，携带的value值为：', e.detail.value)
     this.setData({
       type: e.detail.value
     })
   },
   bindSave: function(e) {
     var that = this;
-    var    amount = e.detail.value.amount;
+    var  amount = e.detail.value.amount;
 
     if (amount == "") {
       wx.showModal({
@@ -99,6 +98,10 @@ Page({
       })
       return
     }
+
+
+
+
     WXAPI.scoreExchange(amount,this.data.type, wx.getStorageSync('token')).then(function(res) {
       // if (res.code == 700) {
       //   wx.showModal({
@@ -122,7 +125,7 @@ Page({
       } else {
         wx.showModal({
           title: '错误',
-          content: res.data.msg,
+          content: res.msg,
           showCancel: false
         })
       }

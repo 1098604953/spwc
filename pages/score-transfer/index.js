@@ -9,8 +9,8 @@ Page({
     uid: undefined,
    toUser:undefined,
     items: [
-      { id: '1', value: '购物积分', checked: 'true' },
-      { id: '2', value: '余额' },
+      { id: '1', value: '余额', checked: 'true' },
+      { id: '2', value: '积分' },
 
     ],
     type: 1,

@@ -219,7 +219,7 @@ module.exports = {
     return request1('/tArticle/index', true, 'get', data)
   },
   noticeDetail: (id) => {
-    return request('/notice/detail', true, 'get', {
+    return request1('/notice/detail', true, 'get', {
       id
     })
   },
